@@ -6,7 +6,8 @@ import re
 
 header = {'Content-Type': 'application/json'}
 
-
+# Function to get api response
+# to check product stock status
 def check(product):
     product_url = product_url_base+product
     url_api = url_api_base+'?url='+product_url
@@ -18,22 +19,24 @@ def check(product):
     else:
         return None
 
-
+# Function to to send message to telegram bot
 def get_product_info(check_result, product_url):
     if check_result is not None:
         if re.search('/yes/', product_url):
-            message = 'SILAHKAN DIBUY SLURRRR!!!\nlink :', product_url
+            message = 'SILAHKAN DIBUY SLURRRR!!!'
             send_message = requests.get(
-                'https://api.telegram.org/bot'+bot_token+'/sendMessage?chat_id='+chat_id+'&text='+message)
-            return product_url+' => AVAILABLE!!'
+                'https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text=Cron at : {2}\n{3} {4}'.format(bot_token, chat_id, datetime.now(), message, product_url))
+            return print(product_url+' => AVAILABLE!!')
+        """
+        # to send message to telegram bot when 
+        # product stock is not available/sold
         else:
-            print('masuk sini')
             message = "SOLD"
             send_message = requests.get(
-                'https://api.telegram.org/bot'+bot_token+'/sendMessage?chat_id='+chat_id+'&text='+message)
+                'https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text=Cron at : {2}\n{3} {4}'.format(bot_token, chat_id, datetime.now(), message, product_url))
             return print(product_url+' => SOLD')
-
-
+        """
+# tuple of all sepatucompass's product
 products = (
     'gazelle-hi-cappuccino',
     'gazelle-hi-red',
@@ -53,5 +56,6 @@ products = (
     'rd-hi'
 )
 
+# loop to check availability one by one the product
 for product in products:
     check(product)

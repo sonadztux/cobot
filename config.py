@@ -1,4 +1,10 @@
-url_api_base = 'https://lupabapak.com/sepatu/api.php'
-product_url_base = 'https://sepatucompass.com/collections/all/products/'
-bot_token = '90306XXX:XXXXYDP48jDVUTJ1v5b_lUrkQuCWohiQ'
-chat_id = 'XXXXX'
+import os
+from dotenv import load_dotenv
+
+project_folder = os.path.expanduser('~/Workspaces/cobot/env')
+load_dotenv(os.path.join(project_folder, '.config'))
+
+url_api_base        = os.getenv("URL_API_BASE")
+product_url_base    = os.getenv("PRODUCT_URL_BASE")
+bot_token           = os.getenv("BOT_TOKEN")
+chat_id             = os.getenv("CHAT_ID")
