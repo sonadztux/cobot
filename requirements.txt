@@ -7,6 +7,6 @@ pyasn1==0.4.7
 pycodestyle==2.5.0
 python-dotenv==0.10.3
 requests==2.22.0
-rsa==4.0
+rsa==4.7
 soupsieve==1.9.5
 urllib3==1.26.5
